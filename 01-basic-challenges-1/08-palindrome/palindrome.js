@@ -8,7 +8,6 @@ function isPalindrome(string) {
     return true
 }
 
-console.log(isPalindrome('A man, a plan, a canal, Panama'))
 
 
 module.exports = isPalindrome;

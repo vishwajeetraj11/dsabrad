@@ -14,7 +14,7 @@ const numbers = [1, 2, 3, 4, 5];
 /**
  * reduce: Accumulates array elements into a single value using a provided function.
  */
-
+console.log(numbers.reduce((total, current) => current+total, 0))
 
 
 /**

@@ -15,5 +15,3 @@ function findMissingLetter(letterArr) {
 }
 
 module.exports = findMissingLetter;
-
-console.log(findMissingLetter(['d','e','f','h']))

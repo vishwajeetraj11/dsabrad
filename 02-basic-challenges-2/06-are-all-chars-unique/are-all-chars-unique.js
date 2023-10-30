@@ -13,6 +13,5 @@ function areAllCharactersUnique(str) {
 
 }
 
-console.log(areAllCharactersUnique('abc'))
 
 module.exports = areAllCharactersUnique;

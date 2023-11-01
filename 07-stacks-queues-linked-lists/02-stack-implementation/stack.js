@@ -28,7 +28,10 @@ class Stack {
         return this.top === this.maxSize - 1;
     }
 
-    
+    peek() {
+        if(this.isEmpty()) return null;
+        return this.stack[this.top]
+    }
 
 }
 

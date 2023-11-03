@@ -13,8 +13,8 @@ function maxDepth(root) {
   const leftRoot = maxDepth(root.left);
   const rightRoot = maxDepth(root.right);
 
-  return Math.max(leftRoot, rightRoot)+1
-
+  return Math.max(leftRoot, rightRoot) + 1
+  
 }
 
 module.exports = {

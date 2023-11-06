@@ -13,10 +13,10 @@ describe('BinarySearchTree', () => {
     bst.insert(15);
     bst.insert(2);
 
-    expect(bst.root.value).toBe(10);
-    expect(bst.root.left.value).toBe(5);
-    expect(bst.root.right.value).toBe(15);
-    expect(bst.root.left.left.value).toBe(2);
+    expect(bst.root.data).toBe(10);
+    expect(bst.root.left.data).toBe(5);
+    expect(bst.root.right.data).toBe(15);
+    expect(bst.root.left.left.data).toBe(2);
   });
 
   test('should find existing nodes using lookup', () => {
@@ -24,9 +24,9 @@ describe('BinarySearchTree', () => {
     bst.insert(5);
     bst.insert(15);
 
-    expect(bst.lookup(10).value).toBe(10);
-    expect(bst.lookup(5).value).toBe(5);
-    expect(bst.lookup(15).value).toBe(15);
+    expect(bst.lookup(10).data).toBe(10);
+    expect(bst.lookup(5).data).toBe(5);
+    expect(bst.lookup(15).data).toBe(15);
   });
 
   test('should return null for non-existing nodes using lookup', () => {
@@ -68,7 +68,7 @@ describe('BinarySearchTree', () => {
     bst.insert(15);
 
     bst.remove(10);
-    expect(bst.root.value).toBe(15);
+    expect(bst.root.data).toBe(15);
   });
 
   test('should print tree in-order', () => {

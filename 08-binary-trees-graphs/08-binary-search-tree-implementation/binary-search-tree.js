@@ -11,8 +11,8 @@ class BinarySearchTree {
         this.root = null;
     }
 
-    insert(value) {
-        const node = new Node(value);
+    insert(data) {
+        const node = new Node(data);
 
         if(this.root === null) {
              this.root = node;
@@ -20,8 +20,8 @@ class BinarySearchTree {
 
             let current = this.root;
             while(true) {
-                // console.log(value, current.data)
-                if(value < current.data) {
+                // console.log(data, current.data)
+                if(data < current.data) {
                     // console.log('left',current)
                     // traverse left
                     if(!current.left) {
@@ -48,7 +48,6 @@ class BinarySearchTree {
     printTree() {
         const printNode = (node) => {
             if(node === null) return null;
-            console.log(node)
             printNode(node.left);
             console.log(node.data)
             printNode(node.right);
@@ -80,10 +79,10 @@ class BinarySearchTree {
             
             if(node === null) return null;
 
-            if(value < node.value) {
+            if(value < node.data) {
                 node.left = removeNode(node.left, value)
                 return node
-            } else if (value > node.value) {
+            } else if (value > node.data) {
                 node.right = removeNode(node.right, value)
                 return node;
             } else {
@@ -97,8 +96,8 @@ class BinarySearchTree {
                 while(tempNode.left !== null) {
                     tempNode = tempNode.left;
                 }
-                node.value = tempNode.value;
-                node.right = removeNode(node.right, tempNode.value);
+                node.data = tempNode.data;
+                node.right = removeNode(node.right, tempNode.data);
                 return node
             }
         }

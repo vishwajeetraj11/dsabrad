@@ -7,3 +7,15 @@ const { Node, BinarySearchTree } = require('./binary-search-tree');
 //    /
 //   2
 
+const bst = new BinarySearchTree();
+
+bst.insert(10);
+bst.insert(5);
+bst.insert(15);
+bst.insert(2);
+
+
+bst.remove(10) 
+bst.printTree();
+
+// console.log(bst.lookup(5))

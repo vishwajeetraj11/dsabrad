@@ -76,6 +76,26 @@ class LinkedList {
 
         }
     }
+
+    isPalindromeLinkedList = () => {
+        if(this.head === null) {
+            return true
+        }
+        const arr=[];
+        let current = this.head;
+        while(current!==null) {
+            arr.push(current.data)
+            current = current.next;
+        }
+      
+        for(let i=0;i<arr.length;i++) {
+            if(arr[i] !== arr[arr.length-1-i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 module.exports = { Node, LinkedList };
+

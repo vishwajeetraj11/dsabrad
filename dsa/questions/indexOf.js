@@ -3,14 +3,9 @@ function indexOf(str, query) {
     for(var i = 0; i < str.length; i++) { 
       for(var q = 0; q < query.length; q++) { 
           if (str[i+q] !== query[q]) {
-            console.log(str[i+q])
-            console.log(query[q])
-            console.log(q)
           break;
         }
-        console.log(q)
         if (q === query.length - 1) {
-            console.log(q)
           return i;
         } 
       }

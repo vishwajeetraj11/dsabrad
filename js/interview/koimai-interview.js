@@ -1,4 +1,29 @@
 /*
+1st round
+//Q: Describe myfunc's functionality at a higher level
+
+function myfunc(nodes, func, parents, index) {
+  return func(
+    nodes,
+    nodes.children
+      ? nodes.children.map((n, i) => myfunc(n, func, [nodes, ...parents], i)) :
+        [], 
+    parents,
+    index
+  );
+}
+
+//Q: What does myfunc1 do
+const func1 = (a, b) => b.reduce((x, b) => x + b, 0) + 1;
+
+// a -> nodes
+const myfunc1 = (a) => myfunc(a, func1, [], 0);
+
+*/
+
+/*
+2nd round.
+
 getUniqueSentences
 
 * Write a function named getUniqueSentences which takes 2 arguments n(number of uniques sentences) and c (concurrency at which parralel API calls can be made) and should return a promise which will get resolved with an array of n unique sentences

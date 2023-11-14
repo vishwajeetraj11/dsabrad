@@ -249,3 +249,6 @@ function getUniqueSentences(n, c) {
 //  console.log({data1})
 // })();
 
+/*
+r3
+Make Minesweeper in the browser. */

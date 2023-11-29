@@ -11,7 +11,7 @@ class ListNode  {
 }
 // sol 1
 var removeElements1 = function(head, val) {
-    if(!head||!head.next) return null;
+    if(!head) return null;
 
 
     while(head) {

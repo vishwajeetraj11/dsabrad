@@ -251,4 +251,5 @@ function getUniqueSentences(n, c) {
 
 /*
 r3
-Make Minesweeper in the browser. */
+Make Minesweeper in the browser.
+*/

@@ -24,7 +24,7 @@ const threeSum = (nums) => {
                 if(partialSum > target) {
                     k--;
                 } else {
-                    j++
+                    j++;
                 }
             }
         }

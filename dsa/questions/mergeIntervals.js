@@ -41,7 +41,6 @@ var merge = function(intervals) {
     intervals.sort((a,b) => a[0]-b[0]);
     let curr = intervals[0];
     let final = [curr];
-    let flag = false;
     for(let i=1; i<intervals.length; i++) {
         const [cf,cl] = curr;
         const [lf, ll] = intervals[i];
@@ -62,6 +61,47 @@ var merge = function(intervals) {
     return final
 };
 
+/* sol 2
+const merge = (intervals) => {
+    intervals.sort((a,b) => a[0]-b[0])
+    let curr = intervals[0];
+    const res = [curr];
+
+    for(let i=0; i<intervals.length; i++) {
+        let [leftInt, rightInt] = curr;
+        const [currLeftInt, currRightInt] = intervals[i];
+        if(rightInt >= currLeftInt) {
+            curr = [leftInt, Math.max(currRightInt, rightInt)]
+        } else {
+            res.push(intervals[i]);
+            curr = intervals[i]
+        }
+        res.pop();
+        res.push(curr)
+    }
+
+    return res;
+}
+
+var merge = function(intervals) {
+    if(intervals.length === 1) return intervals
+    intervals.sort((a,b) => a[0]-b[0]);
+    let curr = intervals[0];
+    let final = [curr];
+
+    for(let i=1; i<intervals.length; i++) {
+        const [cf,cl] = curr;
+        const [lf, ll] = intervals[i];
+        if(cl >= lf) {
+           curr[1] = Math.max(curr[1] , intervals[i][1])
+        } else {
+            final.push(intervals[i])
+            curr = intervals[i]
+        }
+    }
+    return final
+};
+*/
 
 
 

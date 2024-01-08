@@ -54,7 +54,8 @@ const getArr = () => {
     }
     return arr;
 }
-let obj = {};
+
+// let obj = {};
 function findLongestValid(parts){
     const morseToEnglish = {
         ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E",
@@ -96,3 +97,120 @@ const resolver = () => {
 }
 
 console.log(resolver())
+
+
+let timeout;
+let baseURL = `https://exam.ankush.wiki`;
+let obj={};
+(() => {
+    let numParts;
+    const submitChaincode = (chaincode) => {
+        fetch(`${baseURL}/answers`, {
+            method: "POST", 
+            mode: "cors", 
+            cache: "no-cache", 
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            redirect: "follow", 
+            referrerPolicy: "no-referrer", 
+            body: JSON.stringify({ chaincode })
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            console.log("Chaincode submitted successfully!");
+        }).catch((error) => {
+            console.error('Error submitting chaincode:', error);
+        });
+    };
+
+    const processChaincode = (arr) => {
+    return arr.join('');
+    };
+
+
+    function findLongestValid(parts){
+        const morseToEnglish = {
+            ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E",
+            "..-.": "F", "--.": "G", "....": "H", "..": "I", ".---": "J",
+            "-.-": "K", ".-..": "L", "--": "M", "-.": "N", "---": "O",
+            ".--.": "P", "--.-": "Q", ".-.": "R", "...": "S", "-": "T",
+            "..-": "U", "...-": "V", ".--": "W", "-..-": "X", "-.--": "Y",
+            "--..": "Z","-----": "0", ".----": "1", "..---": "2", "...--": "3",
+            "....-": "4", ".....": "5", "-....": "6", "--...": "7", "---..": "8",
+            "----.": "9",
+        };
+        const [left, right] = parts;
+        let index = '';
+        let longestLeft = '';
+        let start = 0;
+        let longestRight = '';
+        for(let i=0; i<left.length; i++) {
+            const currStr = left.slice(start, i+1);
+            longestLeft = morseToEnglish[currStr];
+            if(Number.isInteger(parseInt(longestLeft))) {
+                index += longestLeft;
+                start = i+1;
+            }
+        }
+        longestRight = morseToEnglish[right];
+        obj[index] = longestRight;
+    }
+
+    const downloadPart = async (partNumber) => {
+        let data;
+        fetch(`${baseURL}/data?part=${partNumber}`).then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            response.json().then((val) => {
+                console.log({val});
+                data = val.data;
+                findLongestValid(data.join('').split('➡➡➡'));
+            })
+        }).catch( (error) => {
+            console.error('Error downloading part:', error);
+            throw error;
+        });
+        return data;
+    };
+
+    const fetchParts = async (partNumber = 1, allData = []) => {
+    if (partNumber > numParts) {
+        // const chaincode = processChaincode(allData); 
+        // console.log({chaincode})
+        let chaincode = '';
+        for(let i=1; i<=arr.length; i++) {
+            chaincode += obj[i]
+        }
+        console.log({chaincode})
+        // submitChaincode(chaincode); // And also implement submitChaincode
+        return;
+    }
+    
+    console.log(`Fetching part ${partNumber}`);
+    downloadPart(partNumber).then((response) => {
+        console.log({allData});
+        allData.push(response);
+        timeout = setTimeout(() => fetchParts(partNumber + 1, allData), 2700);
+    }).catch((error) => {
+        console.error('download part failed', error);
+    });
+    };
+
+    const getAssignment = () => {
+        fetch('https://exam.ankush.wiki/assignments').then((response) => {
+            response.json().then(response => {
+                 numParts = response.numParts;
+                 localStorage.setItem('parts', numParts)
+                 console.log({numParts});
+                 localStorage.setItem('data', JSON.stringify(numParts))
+                 fetchParts(1);
+            })
+        })
+    }
+
+    getAssignment();
+})();
